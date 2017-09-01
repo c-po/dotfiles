@@ -7,7 +7,7 @@ servers = (
     use_ssl = "no";
     ssl_verify = "no";
     autoconnect = "yes";
-  }
+  },
   # irc.quakenet.org
   {
     address = "irc.quakenet.org";
@@ -20,20 +20,14 @@ servers = (
 );
 # I'm a freenode user all the way man
 chatnets = {
-  Freenode = {
-    type = "IRC";
-    nick = "cpo";
-  };
-  Quakenet = {
-    type = "IRC";
-    nick = "cpo";
-  };
+  Freenode = { type = "IRC"; nick = "cpo"; };
+  Quakenet = { type = "IRC"; nick = "cpo"; };
 };
 
 # Channels I hang out in a lot. Change these to your own.
 channels = (
   { name = "#vyos"; chatnet = "Freenode"; autojoin = "yes"; },
-  { name = "#mil-lan-nium"; chatnet = "Quakenet"; autojoin = "yes"; },
+  { name = "#mil-lan-nium"; chatnet = "Quakenet"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -195,9 +189,21 @@ statusbar = {
         topicbarend = { priority = "100"; alignment = "right"; };
       };
     };
+    wl0 = {
+      items = {
+        barstar = { priority = "100"; };
+        wlstat0 = { };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
   };
 };
 settings = {
-  core = { real_name = "Christian Poessinger"; user_name = "cpo"; nick = "cpo"; };
+  core = {
+    real_name = "Christian Poessinger";
+    user_name = "cpo";
+    nick = "cpo";
+  };
   "fe-text" = { actlist_sort = "refnum"; };
+  "fe-common/core" = { theme = "lime"; };
 };
