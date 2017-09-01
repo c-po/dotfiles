@@ -1,17 +1,129 @@
 [user]
-        name = Christian Poessinger
-        email = christian@poessinger.com
-[core]
-        autocrlf = input
-        safecrlf = true
-[alias]
-        co = checkout
-        ci = commit
-        st = status
-        br = branch
-        hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-        type = cat-file -t
-        dump = cat-file -p
+    name = Christian Poessinger
+    email = christian@poessinger.com
 
-[http]
-	sslVerify = false
+[color]
+    branch = auto
+    diff = auto
+    status = auto
+
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+
+[alias]
+    # make often typed commands more confortable
+    st = status --short --branch
+
+    # more stat when you pull a branch in
+    pull = pull --stat
+
+    # show all currently ignored files
+    ignored = ls-files -o -i --exclude-standard
+
+    # commit always with a signoff-by and verbose so you
+    # can check the actual changes again
+    cs = commit --signoff --verbose
+
+    # clean untracked files, untracked directories and everything else
+    # This produce a clean state, similar after fresh pull.
+    cleanall = clean --force -d -x
+
+    # list all new commits after you fetched, with stats, but excluding merges
+    lc = log ORIG_HEAD.. --stat --no-merges
+
+    # timezone aware version
+    llog = log --date=local
+
+    # fires up a git daemon for the repo you are currently in
+    serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
+
+    # stash should save untracked files too
+    stash = stash --include-untracked
+
+    gb = branch -av
+    lg = log --color --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    log-graph = log --all --graph --decorate
+    w = !git branch -a && git log --branches --oneline --graph --decorate --simplify-by-decoration --since='2 months ago'
+    diffstat = diff --stat -r
+    last = log -1 HEAD
+    changes = "!sh -c 'git status | sed -n \"/Untracked/N;//N;1,//d;s/^#/?/p\"; git diff --name-status -r \"$@\"' -"
+    who = shortlog -s --
+
+    lol = log --graph --decorate --pretty=oneline --abbrev-commit
+    lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+    lolap = log --graph --decorate --pretty=oneline --abbrev-commit --all --patch
+
+    # for tex, markdown files
+    wdiff = diff --color-words
+
+    # specialized grep command for C/C++ and programming
+    # cases at all use
+    g = grep --break --heading --line-number --show-function --before-context 10 --after-context 2
+
+    merge = merge --progress --verbose
+    quick-stats = '! ~/bin/git-quick-stats'
+
+[core]
+    legacyheaders = false
+    excludesfile = $HOME/.gitignore
+    whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+    editor = vim
+
+[repack]
+    usedeltabaseoffset = true
+
+[push]
+    default = upstream
+    # --follow-tags since 1.8.3. Superior to push --tags because it will
+    # a) push annotated tags, so non-annotated tags for local development to
+    #    avoid tag clashes
+    # b) won't push annotated tags on unrelated branches
+    followTags = true
+
+[merge]
+    tool = vimdiff
+    log = true
+    summary = true
+    stat = true
+
+[diff]
+    # Git diff will use (i)ndex, (w)ork tree, (c)ommit and (o)bject
+    # instead of a/b/c/d as prefixes for patches
+    mnemonicprefix = true
+    submodule = log
+
+[rerere]
+    # Remember my merges
+    enabled = true
+
+[apply]
+    whitespace = fix
+
+[commit]
+    signoff = no
+
+[fetch]
+    # remove stale branches
+    prune = true
+
+[rebase]
+    autosquash = true
+
+[status]
+    submoduleSummary = true
+
+[grep]
+extendRegexp = true
