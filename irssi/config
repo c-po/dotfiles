@@ -27,6 +27,7 @@ chatnets = {
 # Channels I hang out in a lot. Change these to your own.
 channels = (
   { name = "#vyos"; chatnet = "Freenode"; autojoin = "yes"; },
+  { name = "#yocto"; chatnet = "Freenode"; autojoin = "yes"; },
   { name = "#mil-lan-nium"; chatnet = "Quakenet"; autojoin = "yes"; }
 );
 
@@ -207,3 +208,10 @@ settings = {
   "fe-text" = { actlist_sort = "refnum"; };
   "fe-common/core" = { theme = "lime"; };
 };
+ignores = (
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#vyos" ); },
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#yocto" ); }
+);
+hilights = (
+  { text = "cpo+"; nick = "yes"; word = "yes"; regexp = "yes"; }
+);
