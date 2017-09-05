@@ -1,6 +1,5 @@
-[user]
-    name = Christian Poessinger
-    email = christian@poessinger.com
+[include]
+    path = local.gitconfig
 
 [color]
     branch = auto
@@ -126,4 +125,4 @@
     submoduleSummary = true
 
 [grep]
-extendRegexp = true
+    extendRegexp = true
