@@ -102,6 +102,7 @@
     log = true
     summary = true
     stat = true
+    renamelimit = 1279
 
 [diff]
     # Git diff will use (i)ndex, (w)ork tree, (c)ommit and (o)bject
