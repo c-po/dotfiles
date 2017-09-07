@@ -47,6 +47,9 @@
     # timezone aware version
     llog = log --date=local
 
+    # cherry-picked from
+    cpx = cherry-pick -x
+
     # fires up a git daemon for the repo you are currently in
     serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
 
