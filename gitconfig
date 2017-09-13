@@ -78,13 +78,13 @@
 
     merge = merge --progress --verbose
     # git changelog HEAD...22f088c60301
-    changelog = "!f() { r=${1:-`git describe --tags --abbrev=0`..HEAD}; echo Changelog for $r; git log --reverse --no-merges --format='* %s' $r; }; f"
+    changelog = "!f() { r=${1:-`git describe --tags --abbrev=0`..HEAD}; echo "Changelog for $(basename $(pwd)) $r"; git log --reverse --no-merges --format='  * %s' $r; }; f"
 
 [core]
     legacyheaders = false
     excludesfile = $HOME/.gitignore
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
-    editor = nano
+    editor = vim
 
 [repack]
     usedeltabaseoffset = true
