@@ -32,9 +32,16 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
+# machine local aliases
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+
+# add some global aliases
+alias ll='ls -l'
+alias la='ls -A'
+alias l='ls -al --color=always'
+alias dir='ls --color=auto --format=vertical'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -43,11 +50,10 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-alias ll='ls -l'
-alias la='ls -A'
-alias l='ls -al --color=always'
-alias dir='ls --color=auto --format=vertical'
+# use a nice looking terminal
+TERM="xterm-256color"
 
+# add a fancy prompt
 PS1="(\A) \[\033[01;37m\]\u\[\033[01;31m\] \h\[\033[00m\]:\w # "
 
 function git-branch-name {
