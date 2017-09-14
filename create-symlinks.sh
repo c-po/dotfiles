@@ -7,13 +7,14 @@ create()
 		echo "Skipping $2 ... already present"
 	else
 		ln -s $dotdir/$1 $2
-		echo "Symlink $dotdir/$1 -> $2"
+		echo "Created symlink $dotdir/$1 -> $2"
 	fi
 }
 
 create bashrc ~/.bashrc
 create gitconfig ~/.gitconfig
 create irssi ~/.irssi
+create vim ~/.vim
 create vimrc ~/.vimrc
 create selected_editor ~/.selected_editor
 
