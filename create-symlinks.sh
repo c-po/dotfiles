@@ -17,6 +17,7 @@ create irssi ~/.irssi
 create vim ~/.vim
 create vimrc ~/.vimrc
 create selected_editor ~/.selected_editor
+create tmux.conf ~/.tmux.conf
 
 if [ ! -f ~/local.gitconfig ]; then
 	echo "# local only configuration which may differ from machine to machine
