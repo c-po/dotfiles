@@ -43,6 +43,9 @@ alias la='ls -A'
 alias l='ls -al --color=always'
 alias dir='ls --color=auto --format=vertical'
 
+# don't change TERM when launching 'tmux'
+alias term='term -2'
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
