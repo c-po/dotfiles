@@ -42,6 +42,7 @@ alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -al --color=always'
 alias dir='ls --color=auto --format=vertical'
+alias igrep='grep -n -r -i --include \*.c --include \*.h'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
