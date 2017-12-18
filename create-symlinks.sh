@@ -13,7 +13,6 @@ create()
 
 create bashrc ~/.bashrc
 create gitconfig ~/.gitconfig
-create irssi ~/.irssi
 create vim ~/.vim
 create vimrc ~/.vimrc
 create selected_editor ~/.selected_editor
