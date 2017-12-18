@@ -77,8 +77,11 @@
     g = grep --break --heading --line-number --show-function --before-context 10 --after-context 2
 
     merge = merge --progress --verbose
+    br = "!git branch"
+
     # git changelog HEAD...22f088c60301
     changelog = "!f() { r=${1:-`git describe --tags --abbrev=0`..HEAD}; echo "Changelog for $(basename $(pwd)) $r"; git log --reverse --no-merges --format='  * %s' $r; }; f"
+    fancychange = "!f() { r=${1:-`git describe --tags --abbrev=0`..HEAD}; echo "Changelog for $(basename $(pwd)) $r"; git log --reverse --no-merges --format='  * %h %s (%an)' $r; }; f"
 
 [core]
     legacyheaders = false
