@@ -138,3 +138,11 @@
 
 [credential]
     helper = cache --timeout=3600
+
+[sendemail]
+       smtpencryption = tls
+       smtpserver = ex2.mail.ovh.net
+       smtpserverport = 587
+       smtpuser = christian@poessinger.com
+       from = christian@poessinger.com
+       suppresscc = all
