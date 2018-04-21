@@ -144,5 +144,5 @@
        smtpserver = ex2.mail.ovh.net
        smtpserverport = 587
        smtpuser = christian@poessinger.com
-       from = christian@poessinger.com
+       from = Christian Poessinger <christian@poessinger.com>
        suppresscc = all
