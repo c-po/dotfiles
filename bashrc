@@ -77,3 +77,6 @@ ssh-add -l > /dev/null || ssh-add
 
 stty ixany
 stty ixoff -ixon
+
+export EMAIL="christian@poessinger.com"
+export NAME="Christian Poessinger"
