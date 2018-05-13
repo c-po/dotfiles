@@ -30,6 +30,7 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
+au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 
 " Editing behaviour {{{
 set showmode                    " always show what mode we're currently editing in
@@ -39,8 +40,8 @@ set expandtab                   " expand tabs by default (overloadable per file 
 set shiftwidth=4                " number of spaces to use for autoindenting
 set shiftround                  " use multiple of shiftwidth when indenting with '<' and '>'
 set backspace=indent,eol,start  " allow backspacing over everything in insert mode
-set autoindent                  " always set autoindenting on
-set copyindent                  " copy the previous indentation on autoindentin
+"set autoindent                  " always set autoindenting on
+"set copyindent                  " copy the previous indentation on autoindentin
 set showmatch                   " set show matching parenthesis
 set ignorecase                  " ignore case when searching
 set smartcase                   " ignore case if search pattern is all lowercase,
