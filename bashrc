@@ -82,3 +82,5 @@ stty ixoff -ixon
 
 export EMAIL="christian@poessinger.com"
 export NAME="Christian Poessinger"
+
+export PYTHONSTARTUP=~/.pythonrc
