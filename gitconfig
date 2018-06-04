@@ -98,7 +98,7 @@
     # a) push annotated tags, so non-annotated tags for local development to
     #    avoid tag clashes
     # b) won't push annotated tags on unrelated branches
-    followTags = true
+    #followTags = true
 
 [merge]
     tool = vimdiff
