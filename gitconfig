@@ -37,6 +37,9 @@
     # can check the actual changes again
     cs = commit --signoff --verbose
 
+    # checkout shortcut
+    co = checkout
+
     # clean untracked files, untracked directories and everything else
     # This produce a clean state, similar after fresh pull.
     cleanall = clean --force -d -x
