@@ -47,16 +47,11 @@
     # list all new commits after you fetched, with stats, but excluding merges
     lc = log ORIG_HEAD.. --stat --no-merges
 
-    # timezone aware version
-    llog = log --date=local
-
     # cherry-picked - from commit --
     cpx = cherry-pick -x
-    # plain
-    cp = cherry-pick
 
-    # fires up a git daemon for the repo you are currently in
-    serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
+    # plain cherry-pick
+    cp = cherry-pick
 
     # stash should save untracked files too
     stash = stash --include-untracked
@@ -81,8 +76,12 @@
     # cases at all use
     g = grep --break --heading --line-number --show-function --before-context 10 --after-context 2
 
+    # aliases for merge stuff
     merge = merge --progress --verbose
-    br = "!git branch"
+    merge-log = "!f() { git log --stat "$1^..$1"; }; f"
+
+    # branch shortcut
+    br = branch
 
     # git changelog HEAD...22f088c60301
     changelog = "!f() { r=${1:-`git describe --tags --abbrev=0`..HEAD}; echo "Changelog for $(basename $(pwd)) $r"; git log --reverse --no-merges --format='  * %s' $r; }; f"
