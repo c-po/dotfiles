@@ -61,16 +61,12 @@
     log-graph = log --all --graph --decorate
     w = !git branch -a && git log --branches --oneline --graph --decorate --simplify-by-decoration --since='2 months ago'
     diffstat = diff --stat -r
+
+    # Show last commit
     last = log -1 HEAD
-    changes = "!sh -c 'git status | sed -n \"/Untracked/N;//N;1,//d;s/^#/?/p\"; git diff --name-status -r \"$@\"' -"
+
+    # Who contributed to this repository ?
     who = shortlog -s --
-
-    lol = log --graph --decorate --pretty=oneline --abbrev-commit
-    lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
-    lolap = log --graph --decorate --pretty=oneline --abbrev-commit --all --patch
-
-    # for tex, markdown files
-    wdiff = diff --color-words
 
     # specialized grep command for C/C++ and programming
     # cases at all use
