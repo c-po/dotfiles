@@ -84,3 +84,4 @@ export EMAIL="christian@poessinger.com"
 export NAME="Christian Poessinger"
 
 export PYTHONSTARTUP=~/.pythonrc
+export GREP_OPTIONS='--color=auto --exclude=*.pyc --exclude-dir=.git'
