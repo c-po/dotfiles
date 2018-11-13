@@ -56,10 +56,15 @@
     # stash should save untracked files too
     stash = stash --include-untracked
 
+    # show all available branches
     gb = branch -av
-    lg = log --color --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+    # show nice git log graph of current branch, can use multiple branches as argument
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    # show nice git log graph of all branches
+    lga = log --color --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     log-graph = log --all --graph --decorate
-    w = !git branch -a && git log --branches --oneline --graph --decorate --simplify-by-decoration --since='2 months ago'
+
     diffstat = diff --stat -r
 
     # Show last commit
