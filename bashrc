@@ -44,6 +44,7 @@ alias l='ls -al --color=always'
 alias dir='ls --color=auto --format=vertical'
 alias igrep='grep -n -r -i --include \*.c --include \*.h'
 alias irssi='TERM=screen-256color irssi'
+alias grep='grep --color=auto --exclude=*.pyc --exclude-dir=.git'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -84,4 +85,3 @@ export EMAIL="christian@poessinger.com"
 export NAME="Christian Poessinger"
 
 export PYTHONSTARTUP=~/.pythonrc
-export GREP_OPTIONS='--color=auto --exclude=*.pyc --exclude-dir=.git'
