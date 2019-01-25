@@ -24,7 +24,7 @@
     untracked = cyan
 
 [alias]
-    # make often typed commands more confortable
+    # make often typed commands more comfortable
     st = status --short --branch
 
     # more stat when you pull a branch in
@@ -151,3 +151,9 @@
    smtpuser = christian@poessinger.com
    from = Christian Poessinger <christian@poessinger.com>
    suppresscc = all
+
+[filter "lfs"]
+   smudge = git-lfs smudge -- %f
+   process = git-lfs filter-process
+   required = true
+   clean = git-lfs clean -- %f
