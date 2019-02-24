@@ -19,6 +19,7 @@ create selected_editor ~/.selected_editor
 create tmux.conf ~/.tmux.conf
 create tigrc ~/.tigrc
 create bash_profile ~/.bash_profile
+create gitexcludes ~/.gitexcludes
 
 if [ ! -f ~/local.gitconfig ]; then
 	echo "# local only configuration which may differ from machine to machine
