@@ -18,6 +18,7 @@ create vimrc ~/.vimrc
 create selected_editor ~/.selected_editor
 create tmux.conf ~/.tmux.conf
 create tigrc ~/.tigrc
+create bash_profile ~/.bash_profile
 
 if [ ! -f ~/local.gitconfig ]; then
 	echo "# local only configuration which may differ from machine to machine
