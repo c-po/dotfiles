@@ -20,6 +20,7 @@ create tmux.conf ~/.tmux.conf
 create tigrc ~/.tigrc
 create bash_profile ~/.bash_profile
 create gitexcludes ~/.gitexcludes
+create bash_aliases ~/.bash_aliases
 
 if [ ! -f ~/local.gitconfig ]; then
 	echo "# local only configuration which may differ from machine to machine
