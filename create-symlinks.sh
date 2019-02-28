@@ -22,6 +22,10 @@ create bash_profile ~/.bash_profile
 create gitexcludes ~/.gitexcludes
 create bash_aliases ~/.bash_aliases
 
+if [ ! -f ~/local.bash_aliases ]; then
+    touch ~/local.bash_aliases
+fi
+
 if [ ! -f ~/local.gitconfig ]; then
 	echo "# local only configuration which may differ from machine to machine
 [user]

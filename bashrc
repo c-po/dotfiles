@@ -32,19 +32,15 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# machine local aliases
+# machine aliases
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# add some global aliases
-alias ll='ls -l'
-alias la='ls -A'
-alias l='ls -al --color=always'
-alias dir='ls --color=auto --format=vertical'
-alias igrep='grep -n -r -i --include \*.c --include \*.h'
-alias irssi='TERM=screen-256color irssi'
-alias grep='grep --color=auto --exclude=*.pyc --exclude-dir=.git'
+# machine local aliases
+if [ -f ~/local.bash_aliases ]; then
+    . ~/local.bash_aliases
+fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
