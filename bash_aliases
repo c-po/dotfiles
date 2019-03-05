@@ -1,7 +1,6 @@
 alias dbld='dpkg-buildpackage -uc -us -tc -b'
 alias dir='ls --color=auto --format=vertical'
-alias grep='grep --color=auto --exclude=*.pyc --exclude-dir=.git'
-alias igrep='grep -n -r -i --include \*.c --include \*.h'
+alias grep='grep --color=auto --exclude=*.pyc --exclude-dir=\.git --exclude-dir=\.svn'
 alias irssi='TERM=screen-256color irssi'
 alias l='ls -al --color=always'
 alias la='ls -A'
