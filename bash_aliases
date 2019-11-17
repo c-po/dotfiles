@@ -32,4 +32,4 @@ alias vydoc='docker run --rm -it \
     -v "$(pwd)":/vyos \
     -w /vyos/docs \
     -e GOSU_UID=$(id -u) -e GOSU_GID=$(id -g) \
-    vyos/vyos-documentation:master make html'
+    vyos/vyos-documentation make html'
