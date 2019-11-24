@@ -34,8 +34,9 @@ alias vybld_crux='docker run --rm -it \
     vyos/vyos-build:crux bash'
 alias isobuild='./configure --build-by christian@poessinger.com \
     --debian-mirror http://ftp.de.debian.org/debian/ \
-    --version 1.2-rolling-$(date '+%Y%m%d%H%M')-wifi \
+    --version 1.2-rolling-$(date '+%Y%m%d%H%M')-cpo \
     --build-type release \
+    --custom-package "mc vim git" \
     && sudo make iso'
 alias vydoc='docker run --rm -it \
     -v "$(pwd)":/vyos \
