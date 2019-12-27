@@ -31,6 +31,7 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
 au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
+au FileType xml.in setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 
 " Editing behaviour {{{
 set showmode                    " always show what mode we're currently editing in
