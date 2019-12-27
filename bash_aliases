@@ -5,7 +5,7 @@ alias irssi='TERM=screen-256color irssi'
 alias l='ls -al --color=always'
 alias la='ls -A'
 alias ll='ls -l'
-alias vybld='docker run --rm -it \
+alias vybld='docker pull vyos/vyos-build:current && docker run --rm -it \
     -v "$(pwd)":/vyos \
     -v "$HOME/.gitconfig":/etc/gitconfig \
     -v "$HOME/local.gitconfig":/etc/local.gitconfig \
@@ -14,7 +14,7 @@ alias vybld='docker run --rm -it \
     -w /vyos --privileged --sysctl net.ipv6.conf.lo.disable_ipv6=0 \
     -e GOSU_UID=$(id -u) -e GOSU_GID=$(id -g) \
     vyos/vyos-build:current bash'
-alias vybld_crux='docker run --rm -it \
+alias vybld_crux='docker pull vyos/vyos-build:crux && docker run --rm -it \
     -v "$(pwd)":/vyos \
     -v "$HOME/.gitconfig":/etc/gitconfig \
     -v "$HOME/local.gitconfig":/etc/local.gitconfig \
