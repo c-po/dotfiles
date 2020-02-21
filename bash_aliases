@@ -5,6 +5,7 @@ alias irssi='TERM=screen-256color irssi'
 alias l='ls -al --color=always'
 alias la='ls -A'
 alias ll='ls -l'
+alias lsports='sudo netstat -tulnp'
 alias vybld='docker pull vyos/vyos-build:current && docker run --rm -it \
     -v "$(pwd)":/vyos \
     -v "$HOME/.gitconfig":/etc/gitconfig \
