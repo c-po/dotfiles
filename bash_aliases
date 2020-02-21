@@ -24,12 +24,12 @@ alias vybld_crux='docker pull vyos/vyos-build:crux && docker run --rm -it \
     -w /vyos --privileged --sysctl net.ipv6.conf.lo.disable_ipv6=0 \
     -e GOSU_UID=$(id -u) -e GOSU_GID=$(id -g) \
     vyos/vyos-build:crux bash'
-alias isobuild='./configure --build-by christian@poessinger.com \
+alias isobuild='function _vyos_current() { \
+    ./configure --build-by christian@poessinger.com \
     --debian-mirror http://ftp.de.debian.org/debian/ \
-    --version 1.3-cpo-$(date '+%Y%m%d%H%M') \
+    --version 1.3$1-$(date '+%Y%m%d%H%M') \
     --build-type release \
-    --custom-package "mc vim git" \
-    && sudo make iso'
+    --custom-package "mc vim git" && sudo make iso; }; _vyos_current'
 alias vydoc='docker run --rm -it \
     -v "$(pwd)":/vyos \
     -w /vyos/docs \
