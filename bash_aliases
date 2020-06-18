@@ -28,12 +28,12 @@ alias isobuild='function _vyos_current() { \
     version="1.3$1-$(date '+%Y%m%d%H%M')"
     echo "Building custom VyOS version: $version"
     ./configure --build-by christian@poessinger.com \
-    --debian-mirror http://ftp.de.debian.org/debian/ \
     --version $version \
     --build-type release \
-    --custom-package "mc vim git" && sudo make iso; }; _vyos_current'
+    --custom-package "mc vim git tmux grc" && sudo make iso; }; _vyos_current'
 alias vydoc='docker run --rm -it \
     -v "$(pwd)":/vyos \
     -w /vyos/docs \
     -e GOSU_UID=$(id -u) -e GOSU_GID=$(id -g) \
     vyos/vyos-documentation make html'
+alias youtube='~/youtube-dl -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio"'
