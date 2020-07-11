@@ -31,7 +31,7 @@ alias isobuild='function _vyos_current() { \
     --version $version \
     --build-type release \
     --custom-package "mc vim git tmux grc" && sudo make iso; }; _vyos_current'
-alias vydoc='docker run --rm -it \
+alias vydoc='docker pull vyos/vyos-documentation && docker run --rm -it \
     -v "$(pwd)":/vyos \
     -w /vyos/docs \
     -e GOSU_UID=$(id -u) -e GOSU_GID=$(id -g) \
