@@ -65,14 +65,14 @@ function git-branch-prompt {
 
 PS1="(\A) \[\033[01;37m\]\u\[\033[01;31m\] \h\[\033[00m\]:\w\$(git-branch-prompt) # "
 
-#if [ -f ~/.ssh/id_rsa ]; then
-#    if [ ! -S ~/.ssh/ssh_auth_sock ]; then
-#        eval `ssh-agent`
-#        ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
-#    fi
-#    export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
-#    ssh-add -l > /dev/null || ssh-add
-#fi
+if [ -f ~/.ssh/id_rsa ] || [ -f ~/.ssh/id_ed25519 ]; then
+    if [ ! -S ~/.ssh/ssh_auth_sock ]; then
+        eval `ssh-agent`
+        ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+    fi
+    export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+    ssh-add -l > /dev/null || ssh-add
+fi
 
 stty ixany
 stty ixoff -ixon
