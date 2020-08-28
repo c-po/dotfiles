@@ -67,7 +67,9 @@ PS1="(\A) \[\033[01;37m\]\u\[\033[01;31m\] \h\[\033[00m\]:\w\$(git-branch-prompt
 
 if [ -f ~/.ssh/id_rsa ] || [ -f ~/.ssh/id_ed25519 ] || [ -f ~/.ssh/id_ecdsa ]; then
     if [ -x "$(command -v keychain)" ]; then
-        keychain --nogui $HOME/.ssh/id_ecdsa
+        for key in $(find $HOME/.ssh -type f ! -name "*.*" -name "id_*"); do
+            keychain --nogui $key
+        done
         source $HOME/.keychain/$HOSTNAME-sh
     else
         if [ ! -S ~/.ssh/ssh_auth_sock ]; then
