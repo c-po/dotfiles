@@ -31,7 +31,7 @@ alias isobuild='function _vyos_current() { \
     ./configure --build-by christian@poessinger.com \
     --version $version \
     --build-type release \
-    --custom-package "mc vim git tmux grc" && sudo make iso; }; _vyos_current'
+    --custom-package "mc vim git tmux grc vyos-1x-smoketest" && sudo make iso; }; _vyos_current'
 alias vydoc='docker pull vyos/vyos-documentation && docker run --rm -it \
     -v "$(pwd)":/vyos \
     -w /vyos/docs \
