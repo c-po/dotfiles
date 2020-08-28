@@ -38,3 +38,14 @@ alias vydoc='docker pull vyos/vyos-documentation && docker run --rm -it \
     -e GOSU_UID=$(id -u) -e GOSU_GID=$(id -g) \
     vyos/vyos-documentation make html'
 alias youtube='~/youtube-dl -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio"'
+alias anscvp='docker run --rm -it \
+    -v "$(pwd)":/arista \
+    -v "$HOME/.vimrc":/home/ans_cvp/.vimrc \
+    -v "$HOME/.vim":/home/ans_cvp/.vim \
+    -v "$HOME/.gitconfig":/etc/gitconfig \
+    -v "$HOME/local.gitconfig":/etc/local.gitconfig \
+    -v "$HOME/.bash_aliases":/home/ans_cvp/.bash_aliases \
+    -v "$HOME/.bashrc":/home/ans_cvp/.bashrc \
+    -w /arista \
+    -e GOSU_UID=$(id -u) -e GOSU_GID=$(id -g) \
+    ansible-arista:latest bash'
