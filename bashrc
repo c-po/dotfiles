@@ -65,13 +65,18 @@ function git-branch-prompt {
 
 PS1="(\A) \[\033[01;37m\]\u\[\033[01;31m\] \h\[\033[00m\]:\w\$(git-branch-prompt) # "
 
-if [ -f ~/.ssh/id_rsa ] || [ -f ~/.ssh/id_ed25519 ]; then
-    if [ ! -S ~/.ssh/ssh_auth_sock ]; then
-        eval `ssh-agent`
-        ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+if [ -f ~/.ssh/id_rsa ] || [ -f ~/.ssh/id_ed25519 ] || [ -f ~/.ssh/id_ecdsa ]; then
+    if [ -x "$(command -v keychain)" ]; then
+        keychain --nogui $HOME/.ssh/id_ecdsa
+        source $HOME/.keychain/$HOSTNAME-sh
+    else
+        if [ ! -S ~/.ssh/ssh_auth_sock ]; then
+            eval `ssh-agent`
+            ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+        fi
+        export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+        ssh-add -l > /dev/null || ssh-add
     fi
-    export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
-    ssh-add -l > /dev/null || ssh-add
 fi
 
 stty ixany
@@ -79,6 +84,5 @@ stty ixoff -ixon
 
 export EMAIL="christian@poessinger.com"
 export NAME="Christian Poessinger"
-
 export PYTHONSTARTUP=~/.pythonrc
-eval ``keychain --eval --agents ssh id_rsa
+
