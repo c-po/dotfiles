@@ -84,6 +84,11 @@ fi
 stty ixany
 stty ixoff -ixon
 
+# CDir on WSL hosts to real home instead of /mnt/c/Users/<username> Windows home
+if [[ "$(< /proc/sys/kernel/osrelease)" == *[Mm]icrosoft* ]]; then
+    cd
+fi
+
 export EMAIL="christian@poessinger.com"
 export NAME="Christian Poessinger"
 export PYTHONSTARTUP=~/.pythonrc
