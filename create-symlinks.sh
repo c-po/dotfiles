@@ -34,7 +34,7 @@ if [ ! -f ~/local.gitconfig ]; then
     email = christian@poessinger.com
 
 [http]
-    # for communication with www repositories accessable via proxy
+    # for communication with www repositories accessible via proxy
     # you need to define a proxy (probably also for http)
     # proxy = http://user:password@proxy.domain.tld:80
 
