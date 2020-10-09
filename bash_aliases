@@ -8,7 +8,8 @@ alias ll='ls -l'
 alias lsports='sudo netstat -tulnp'
 alias vybld='docker pull vyos/vyos-build:current && docker run --rm -it \
     -v "$(pwd)":/vyos \
-    -v "$HOME/.vimrc":/home/vyos_bld/vimrc \
+    -v "$HOME/.vimrc":/home/vyos_bld/.vimrc \
+    -v "$HOME/.vim":/home/vyos_bld/.vim \
     -v "$HOME/.gitconfig":/etc/gitconfig \
     -v "$HOME/local.gitconfig":/etc/local.gitconfig \
     -v "$HOME/.bash_aliases":/home/vyos_bld/.bash_aliases \
