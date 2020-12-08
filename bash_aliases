@@ -6,6 +6,18 @@ alias l='ls -al --color=always'
 alias la='ls -A'
 alias ll='ls -l'
 alias lsports='sudo netstat -tulnp'
+alias v1x='scp_vyos-1x LR1.wue3.mybll.net'
+alias v2x='scp_vyos-1x LR2.wue3.mybll.net'
+alias v3x='scp_vyos-1x LR3.wue3.mybll.net'
+alias v4x='scp_vyos-1x LR4.wue3.mybll.net'
+alias scp_vyos-1x='function _vyos_v1x() { \
+    files=$(ls -1t ~/vyos-1x*.deb | head -n 2)
+    scp -r $files $1:/tmp
+    if [ "$?" == "0" ]; then
+        ssh $1 sudo dpkg --install --force-all /tmp/vyos-1x*.deb
+        ssh $1 sudo rm -f /tmp/vyos-1x*.deb
+    fi
+    }; _vyos_v1x'
 alias vybld='docker pull vyos/vyos-build:current && docker run --rm -it \
     -v "$(pwd)":/vyos \
     -v "$HOME/.vimrc":/home/vyos_bld/.vimrc \
