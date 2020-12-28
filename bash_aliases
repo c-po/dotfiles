@@ -11,7 +11,7 @@ alias v2x='scp_vyos-1x LR2.wue3.mybll.net'
 alias v3x='scp_vyos-1x LR3.wue3.mybll.net'
 alias v4x='scp_vyos-1x LR4.wue3.mybll.net'
 alias scp_vyos-1x='function _vyos_v1x() { \
-    files=$(ls -1t ~/vyos-1x*.deb | head -n 2)
+    files=$(ls -1t ~/vyos-1x*.deb | head -n 4)
     scp -r $files $1:/tmp
     if [ "$?" == "0" ]; then
         ssh $1 sudo dpkg --install --force-all /tmp/vyos-1x*.deb
