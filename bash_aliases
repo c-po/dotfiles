@@ -18,28 +18,25 @@ alias scp_vyos-1x='function _vyos_v1x() { \
         ssh $1 sudo rm -f /tmp/vyos-1x*.deb
     fi
     }; _vyos_v1x'
-alias vybld='docker pull vyos/vyos-build:current && docker run --rm -it \
-    -v "$(pwd)":/vyos \
-    -v "$HOME/.vimrc":/home/vyos_bld/.vimrc \
-    -v "$HOME/.vim":/home/vyos_bld/.vim \
-    -v "$HOME/.gitconfig":/etc/gitconfig \
-    -v "$HOME/local.gitconfig":/etc/local.gitconfig \
-    -v "$HOME/.bash_aliases":/home/vyos_bld/.bash_aliases \
-    -v "$HOME/.bashrc":/home/vyos_bld/.bashrc \
-    -w /vyos --privileged --sysctl net.ipv6.conf.lo.disable_ipv6=0 \
-    -e GOSU_UID=$(id -u) -e GOSU_GID=$(id -g) \
-    vyos/vyos-build:current bash'
-alias vybld_crux='docker pull vyos/vyos-build:crux && docker run --rm -it \
-    -v "$(pwd)":/vyos \
-    -v "$HOME/.gitconfig":/etc/gitconfig \
-    -v "$HOME/local.gitconfig":/etc/local.gitconfig \
-    -v "$HOME/.bash_aliases":/home/vyos_bld/.bash_aliases \
-    -v "$HOME/.bashrc":/home/vyos_bld/.bashrc \
-    -w /vyos --privileged --sysctl net.ipv6.conf.lo.disable_ipv6=0 \
-    -e GOSU_UID=$(id -u) -e GOSU_GID=$(id -g) \
-    vyos/vyos-build:crux bash'
+alias func_vybld='function _func_vyos_build() { \
+    docker pull vyos/vyos-build:$1
+    docker run --rm -it \
+        -v "$(pwd)":/vyos \
+        -v "$HOME/.vimrc":/home/vyos_bld/.vimrc \
+        -v "$HOME/.vim":/home/vyos_bld/.vim \
+        -v "$HOME/.gitconfig":/etc/gitconfig \
+        -v "$HOME/local.gitconfig":/etc/local.gitconfig \
+        -v "$HOME/.bash_aliases":/home/vyos_bld/.bash_aliases \
+        -v "$HOME/.bashrc":/home/vyos_bld/.bashrc \
+        -w /vyos --privileged --sysctl net.ipv6.conf.lo.disable_ipv6=0 \
+        -e GOSU_UID=$(id -u) -e GOSU_GID=$(id -g) \
+        vyos/vyos-build:$1 bash
+    }; _func_vyos_build'
+alias vybld='func_vybld current'
+alias vybld_equuleus='func_vybld equuleus'
+alias vybld_crux='func_vybld crux'
 alias isobuild='function _vyos_current() { \
-    version="1.3$1-$(date '+%Y%m%d%H%M')"
+    version="1.4$1-$(date '+%Y%m%d%H%M')"
     echo "Building custom VyOS version: $version"
     ./configure --build-by christian@poessinger.com \
     --version $version \
