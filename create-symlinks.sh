@@ -22,6 +22,7 @@ create bash_profile ~/.bash_profile
 create gitexcludes ~/.gitexcludes
 create bash_aliases ~/.bash_aliases
 create nanorc ~/.nanorc
+create inputrc ~/.inputrc
 
 if [ ! -f ~/local.bash_aliases ]; then
     touch ~/local.bash_aliases

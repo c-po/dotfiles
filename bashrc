@@ -93,3 +93,5 @@ export EMAIL="christian@poessinger.com"
 export NAME="Christian Poessinger"
 export PYTHONSTARTUP=~/.pythonrc
 
+# No beep in less, annoying in WSL2
+export LESS="$LESS -R -Q"
