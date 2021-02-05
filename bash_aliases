@@ -55,6 +55,7 @@ alias anscvp='docker run --rm -it \
     -v "$HOME/.gitconfig":/etc/gitconfig \
     -v "$HOME/local.gitconfig":/etc/local.gitconfig \
     -v "$HOME/.bash_aliases":/home/ans_cvp/.bash_aliases \
+    -v "$HOME/.bash_history":/home/ans_cvp/.bash_history \
     -v "$HOME/.bashrc":/home/ans_cvp/.bashrc \
     -w /arista \
     -e GOSU_UID=$(id -u) -e GOSU_GID=$(id -g) \
