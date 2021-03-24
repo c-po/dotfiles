@@ -23,6 +23,8 @@ create gitexcludes ~/.gitexcludes
 create bash_aliases ~/.bash_aliases
 create nanorc ~/.nanorc
 create inputrc ~/.inputrc
+create zshrc ~/.zshrc
+create p10k.zsh ~/.p10k.zsh
 
 if [ ! -f ~/local.bash_aliases ]; then
     touch ~/local.bash_aliases
