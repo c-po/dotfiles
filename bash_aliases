@@ -38,17 +38,18 @@ alias vybld_crux='func_vybld crux'
 alias isobuild='function _vyos_current() { \
     branch=$(jq -r -M '.vyos_branch' data/defaults.json)
     major="1.4"
+    cust_packages="--custom-package \"mc vim git tmux grc vyos-1x-smoketest\""
     if [ $branch == "crux" ]; then
         major="1.2"
+        cust_packages=""
     elif [ $branch == "equuleus" ]; then
         major="1.3"
     fi
     version="${major}$1-$(date +%Y%m%d%H%M)"
     echo "Building custom VyOS version: $version"
     ./configure --build-by christian@poessinger.com \
-    --version $version \
-    --build-type release \
-    --custom-package "mc vim git tmux grc vyos-1x-smoketest" && sudo make iso; }; _vyos_current'
+        --version $version --build-type release $cust_packages
+    sudo make iso; }; _vyos_current'
 alias vydoc='docker pull vyos/vyos-documentation && docker run --rm -it \
     -v "$(pwd)":/vyos \
     -w /vyos/docs \
