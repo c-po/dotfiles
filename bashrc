@@ -89,6 +89,14 @@ if [[ ! -f /.dockerenv ]] && [[ "$(< /proc/sys/kernel/osrelease)" == *[Mm]icroso
     cd
 fi
 
+# load custom CA for python if it exists
+if [ -f /etc/ssl/certs/ca-certificates.crt ]; then
+    export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+fi
+
+if [ -f ~/.pythonrc ]; then
+    export PYTHONSTARTUP=~/.pythonrc
+fi
+
 export EMAIL="christian@poessinger.com"
 export NAME="Christian Poessinger"
-export PYTHONSTARTUP=~/.pythonrc
