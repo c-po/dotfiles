@@ -36,19 +36,29 @@ alias vybld='func_vybld current'
 alias vybld_equuleus='func_vybld equuleus'
 alias vybld_crux='func_vybld crux'
 alias isobuild='function _vyos_current() { \
-    branch=$(jq -r -M '.vyos_branch' data/defaults.json)
+    branch=$(tomlq -r -M .vyos_branch data/defaults.toml)
     major="1.4"
-    cust_packages="--custom-package \"mc vim git tmux grc vyos-1x-smoketest\""
+    custom_packages="strace vim git mc vyos-1x-smoketest"
+    version="${major}$1-$(date +%Y%m%d%H%M)"
+    echo "Building custom VyOS version: $version"
+    sudo ./build-vyos-image \
+        --build-by christian@poessinger.com \
+        --version $version \
+        --build-type release \
+        --architecture amd64 \
+        --custom-package "$custom_packages" iso; }; _vyos_current'
+alias isobuild2='function _vyos_current() { \
+    branch=$(jq -r -M .vyos_branch data/defaults.json)
+    major="1.3"
+    custom_packages="mc vim git tmux vyos-1x-smoketest"
     if [ $branch == "crux" ]; then
         major="1.2"
-        cust_packages=""
-    elif [ $branch == "equuleus" ]; then
-        major="1.3"
+        custom_packages="mc vim git tmux"
     fi
     version="${major}$1-$(date +%Y%m%d%H%M)"
     echo "Building custom VyOS version: $version"
     ./configure --build-by christian@poessinger.com \
-        --version $version --build-type release $cust_packages
+        --version $version --build-type release --custom-package "$custom_packages"
     sudo make iso; }; _vyos_current'
 alias vydoc='docker pull vyos/vyos-documentation && docker run --rm -it \
     -v "$(pwd)":/vyos \
