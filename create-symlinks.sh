@@ -33,8 +33,8 @@ fi
 if [ ! -f ~/local.gitconfig ]; then
 	echo "# local only configuration which may differ from machine to machine
 [user]
-    name = Christian Poessinger
-    email = christian@poessinger.com
+    name = Christian Breunig
+    email = christian@breunig.cc
 
 [http]
     # for communication with www repositories accessible via proxy

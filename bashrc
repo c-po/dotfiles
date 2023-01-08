@@ -98,5 +98,5 @@ if [ -f ~/.pythonrc ]; then
     export PYTHONSTARTUP=~/.pythonrc
 fi
 
-export EMAIL="christian@poessinger.com"
-export NAME="Christian Poessinger"
+export EMAIL="christian@breunig.cc"
+export NAME="Christian Breunig"

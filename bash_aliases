@@ -42,7 +42,7 @@ alias isobuild='function _vyos_current() { \
     version="${major}$1-$(date +%Y%m%d%H%M)"
     echo "Building custom VyOS version: $version"
     sudo ./build-vyos-image \
-        --build-by christian@poessinger.com \
+        --build-by christian@breunig.cc \
         --version $version \
         --build-type release \
         --architecture amd64 \
@@ -57,7 +57,7 @@ alias isobuild2='function _vyos_current() { \
     fi
     version="${major}$1-$(date +%Y%m%d%H%M)"
     echo "Building custom VyOS version: $version"
-    ./configure --build-by christian@poessinger.com \
+    ./configure --build-by christian@breunig.cc \
         --version $version --build-type release --custom-package "$custom_packages"
     sudo make iso; }; _vyos_current'
 alias vydoc='docker pull vyos/vyos-documentation && docker run --rm -it \

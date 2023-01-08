@@ -146,10 +146,10 @@
 
 [sendemail]
    smtpencryption = tls
-   smtpserver = ex2.mail.ovh.net
+   smtpserver = ex5.mail.ovh.net
    smtpserverport = 587
-   smtpuser = christian@poessinger.com
-   from = Christian Poessinger <christian@poessinger.com>
+   smtpuser = christian@breunig.cc
+   from = Christian Breunig <christian@breunig.cc>
    suppresscc = all
 
 [filter "lfs"]
