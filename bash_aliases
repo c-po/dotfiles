@@ -11,11 +11,12 @@ alias v2x='scp_vyos-1x LR2.wue3.mybll.net'
 alias v3x='scp_vyos-1x LR3.wue3.mybll.net'
 alias v4x='scp_vyos-1x LR4.wue3.mybll.net'
 alias scp_vyos-1x='function _vyos_v1x() { \
-    files=$(ls -1t ~/vyos-1x*.deb | head -n 4)
+    PATTERN_BASE="vyos-1x"
+    files=$(ls -1t ~/${PATTERN_BASE}*.deb | head -n 4)
     scp -r $files $1:/tmp
     if [ "$?" == "0" ]; then
-        ssh $1 sudo dpkg --install --force-all /tmp/vyos-1x*.deb
-        ssh $1 sudo rm -f /tmp/vyos-1x*.deb
+        ssh $1 sudo dpkg --install --force-all /tmp/${PATTERN_BASE}*.deb
+        ssh $1 sudo rm -f /tmp/${PATTERN_BASE}*.deb
     fi
     }; _vyos_v1x'
 alias func_vybld='function _func_vyos_build() { \
@@ -38,7 +39,7 @@ alias vybld_crux='func_vybld crux'
 alias isobuild='function _vyos_current() { \
     branch=$(tomlq -r -M .vyos_branch data/defaults.toml)
     major="1.4"
-    custom_packages="strace vim git mc vyos-1x-smoketest"
+    custom_packages="strace vim tmux git mc vyos-1x-smoketest"
     version="${major}$1-$(date +%Y%m%d%H%M)"
     echo "Building custom VyOS version: $version"
     sudo ./build-vyos-image \
@@ -65,7 +66,8 @@ alias vydoc='docker pull vyos/vyos-documentation && docker run --rm -it \
     -w /vyos/docs \
     -e GOSU_UID=$(id -u) -e GOSU_GID=$(id -g) \
     vyos/vyos-documentation make html'
-alias youtube='~/youtube-dl -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio"'
+alias youtube='~/yt-dlp_linux -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio"'
+alias youtube_audio='~/yt-dlp_linux -f "bestaudio[ext=m4a]/bestaudio"'
 alias anscvp='docker run --rm -it \
     -v "$(pwd)":/arista \
     -v "$HOME/.vimrc":/home/ans_cvp/.vimrc \
