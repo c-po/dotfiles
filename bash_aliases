@@ -34,11 +34,15 @@ alias func_vybld='function _func_vyos_build() { \
         vyos/vyos-build:$1 bash
     }; _func_vyos_build'
 alias vybld='func_vybld current'
+alias vybld_sagitta='func_vybld sagitta'
 alias vybld_equuleus='func_vybld equuleus'
 alias vybld_crux='func_vybld crux'
 alias isobuild='function _vyos_current() { \
     branch=$(tomlq -r -M .vyos_branch data/defaults.toml)
-    major="1.4"
+    major="1.5"
+    if [ ${branch} == "sagitta" ]; then
+        major="1.4"
+    fi
     custom_packages="strace vim tmux git mc vyos-1x-smoketest"
     version="${major}$1-$(date +%Y%m%d%H%M)"
     echo "Building custom VyOS version: $version"
@@ -48,7 +52,7 @@ alias isobuild='function _vyos_current() { \
         --build-type release \
         --architecture amd64 \
         --custom-package "$custom_packages" iso; }; _vyos_current'
-alias isobuild2='function _vyos_current() { \
+alias isobuild_equuleus='function _vyos_current() { \
     branch=$(jq -r -M .vyos_branch data/defaults.json)
     major="1.3"
     custom_packages="mc vim git tmux vyos-1x-smoketest"
