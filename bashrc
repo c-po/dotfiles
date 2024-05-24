@@ -101,6 +101,10 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+if [ -f ~/local.bash_aliases ]; then
+    . ~/local.bash_aliases
+fi
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -153,3 +157,6 @@ if [[ ! -f /.dockerenv ]] && [[ "$(< /proc/sys/kernel/osrelease)" == *[Mm]icroso
     cd
 fi
 
+if [ -f /etc/ssl/certs/ca-certificates.crt ]; then
+    export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+fi
