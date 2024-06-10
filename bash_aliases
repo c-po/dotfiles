@@ -25,9 +25,10 @@ alias func_vybld='function _func_vyos_build() { \
         -v "$(pwd)":/vyos \
         -v "$HOME/.vimrc":/home/vyos_bld/.vimrc \
         -v "$HOME/.vim":/home/vyos_bld/.vim \
-        -v "$HOME/.gitconfig":/etc/gitconfig \
-        -v "$HOME/local.gitconfig":/etc/local.gitconfig \
+        -v "$HOME/.gitconfig":/home/vyos_bld/.gitconfig \
+        -v "$HOME/local.gitconfig":/home/vyos_bld/local.gitconfig \
         -v "$HOME/.bash_aliases":/home/vyos_bld/.bash_aliases \
+        -v "$HOME/local.bash_aliases":/home/vyos_bld/local.bash_aliases \
         -v "$HOME/.bashrc":/home/vyos_bld/.bashrc \
         -w /vyos --privileged --sysctl net.ipv6.conf.lo.disable_ipv6=0 \
         -e GOSU_UID=$(id -u) -e GOSU_GID=$(id -g) \
@@ -40,6 +41,7 @@ alias vybld_crux='func_vybld crux'
 alias isobuild='function _vyos_current() { \
     branch=$(tomlq -r -M .vyos_branch data/defaults.toml)
     major="1.5"
+    flavor="generic"
     if [ ${branch} == "sagitta" ]; then
         major="1.4"
     fi
@@ -51,7 +53,7 @@ alias isobuild='function _vyos_current() { \
         --version $version \
         --build-type release \
         --architecture amd64 \
-        --custom-package "$custom_packages" iso; }; _vyos_current'
+        --custom-package "$custom_packages" $flavor; }; _vyos_current'
 alias isobuild_equuleus='function _vyos_current() { \
     branch=$(jq -r -M .vyos_branch data/defaults.json)
     major="1.3"
@@ -70,7 +72,7 @@ alias vydoc='docker pull vyos/vyos-documentation && docker run --rm -it \
     -w /vyos/docs \
     -e GOSU_UID=$(id -u) -e GOSU_GID=$(id -g) \
     vyos/vyos-documentation make html'
-alias youtube='~/yt-dlp_linux -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio"'
+alias youtube='./yt-dlp_linux -f bestvideo*+bestaudio/best'
 alias youtube_audio='~/yt-dlp_linux -f "bestaudio[ext=m4a]/bestaudio"'
 alias anscvp='docker run --rm -it \
     -v "$(pwd)":/arista \
