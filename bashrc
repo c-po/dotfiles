@@ -149,6 +149,10 @@ fi
 # CDir on WSL hosts to real home instead of /mnt/c/Users/<username> Windows home
 if [[ ! -f /.dockerenv ]] && [[ "$(< /proc/sys/kernel/osrelease)" == *[Mm]icrosoft* ]]; then
     cd
+    RUNNING=`ps aux | grep dockerd | grep -v grep`
+    if [ -x /usr/bin/dockerd ] && [ -z "$RUNNING" ]; then
+        sudo service docker start
+    fi
 fi
 
 if [ -f /etc/ssl/certs/ca-certificates.crt ]; then
