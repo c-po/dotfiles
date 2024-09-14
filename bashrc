@@ -101,10 +101,6 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-if [ -f ~/local.bash_aliases ]; then
-    . ~/local.bash_aliases
-fi
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -115,6 +111,8 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+### CUSTOM ###
 
 function git-branch-name {
   git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3
@@ -127,10 +125,6 @@ PS1="(\A) \[\033[01;37m\]\u\[\033[01;31m\] \h\[\033[00m\]:\w\$(git-branch-prompt
 
 export EMAIL="christian@breunig.cc"
 export NAME="Christian Breunig"
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
 
 if [ -f ~/.pythonrc ]; then
     export PYTHONSTARTUP=~/.pythonrc
@@ -159,4 +153,8 @@ fi
 
 if [ -f /etc/ssl/certs/ca-certificates.crt ]; then
     export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+fi
+
+if [ -f ~/local.bash_aliases ]; then
+    . ~/local.bash_aliases
 fi
