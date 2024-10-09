@@ -76,6 +76,8 @@ alias youtube='./yt-dlp_linux -f bestvideo*+bestaudio/best'
 alias youtube_audio='~/yt-dlp_linux -f "bestaudio[ext=m4a]/bestaudio"'
 alias anscvp='docker run --rm -it \
     -v "$(pwd)":/arista \
+    -v /etc/timezone:/etc/timezone:ro \
+    -v /etc/localtime:/etc/localtime:ro \
     -v "$HOME/.vimrc":/home/ans_cvp/.vimrc \
     -v "$HOME/.vim":/home/ans_cvp/.vim \
     -v "$HOME/.gitconfig":/etc/gitconfig \
