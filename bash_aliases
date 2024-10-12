@@ -20,9 +20,11 @@ alias scp_vyos-1x='function _vyos_v1x() { \
     fi
     }; _vyos_v1x'
 alias func_vybld='function _func_vyos_build() { \
-    docker pull vyos/vyos-build:$1
+#   docker pull vyos/vyos-build:$1
     docker run --rm -it \
         -v "$(pwd)":/vyos \
+        -v /etc/timezone:/etc/timezone:ro \
+        -v /etc/localtime:/etc/localtime:ro \
         -v "$HOME/.vimrc":/home/vyos_bld/.vimrc \
         -v "$HOME/.vim":/home/vyos_bld/.vim \
         -v "$HOME/.gitconfig":/home/vyos_bld/.gitconfig \
@@ -44,6 +46,7 @@ alias isobuild='function _vyos_current() { \
     flavor="generic"
     if [ ${branch} == "sagitta" ]; then
         major="1.4"
+        flavor="iso"
     fi
     custom_packages="strace vim tmux git mc vyos-1x-smoketest"
     version="${major}$1-$(date +%Y%m%d%H%M)"
