@@ -47,7 +47,6 @@ alias isobuild='function _vyos_current() { \
     flavor="generic"
     if [ ${branch} == "sagitta" ]; then
         major="1.4"
-        flavor="iso"
     fi
     custom_packages="strace vim tmux git mc vyos-1x-smoketest"
     version="${major}$1-$(date +%Y%m%d%H%M)"
