@@ -1,30 +1,29 @@
 #!/bin/sh
-dotdir=$(pwd)
 
 create()
 {
 	if [ -f $2 ] || [ -d $2 ]; then
 		echo "Skipping $2 ... already present"
 	else
-		ln -s $dotdir/$1 $2
+		ln -s dotfiles/$1 $2
 		echo "Created symlink $dotdir/$1 -> $2"
 	fi
 }
 
-create bashrc ~/.bashrc
-create gitconfig ~/.gitconfig
-create vim ~/.vim
-create vimrc ~/.vimrc
-create selected_editor ~/.selected_editor
-create tmux.conf ~/.tmux.conf
-create tigrc ~/.tigrc
-create bash_profile ~/.bash_profile
-create gitexcludes ~/.gitexcludes
-create bash_aliases ~/.bash_aliases
-create nanorc ~/.nanorc
-create inputrc ~/.inputrc
-create zshrc ~/.zshrc
-create p10k.zsh ~/.p10k.zsh
+create bashrc ../.bashrc
+create gitconfig ../.gitconfig
+create vim ../.vim
+create vimrc ../.vimrc
+create selected_editor ../.selected_editor
+create tmux.conf ../.tmux.conf
+create tigrc ../.tigrc
+create bash_profile ../.bash_profile
+create gitexcludes ../.gitexcludes
+create bash_aliases ../.bash_aliases
+create nanorc ../.nanorc
+create inputrc ../.inputrc
+create zshrc ../.zshrc
+create p10k.zsh ../.p10k.zsh
 
 if [ ! -f ~/local.bash_aliases ]; then
     touch ~/local.bash_aliases
