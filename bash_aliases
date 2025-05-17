@@ -95,3 +95,7 @@ alias anscvp='docker run --rm -it \
     -w /arista \
     -e GOSU_UID=$(id -u) -e GOSU_GID=$(id -g) \
     ansible-arista:latest bash'
+alias kali='docker run --rm -it \
+    -v "$(pwd)":/kali \
+    -w /kali \
+    kalilinux/kali-rolling'
