@@ -43,17 +43,22 @@ alias isobuild='function _vyos_current() { \
     branch=$(tomlq -r -M .vyos_branch data/defaults.toml)
     major="1.5"
     flavor="generic"
+    build_type="development"
     if [ ${branch} == "sagitta" ]; then
-        major="1.4"
+        version="1.4$1-$(date +%Y%m%d%H%M)"
+        build_type="release"
+    elif [ ${branch} == "circinus" ]; then
+        version="1.5$1-$(date +%Y%m%d%H%M)"
+    else
+        version="$(date -u +%Y.%m.%d-%H%M)$1"
     fi
     custom_packages="strace vim tmux git mc vyos-1x-smoketest"
-    version="${major}$1-$(date +%Y%m%d%H%M)"
     echo "Building custom VyOS version: $version"
     sudo ./build-vyos-image \
         --build-by christian@breunig.cc \
         --version $version \
-        --build-type release \
         --architecture amd64 \
+        --build-type $build_type \
         --custom-package "$custom_packages" $flavor; }; _vyos_current'
 alias isobuild_equuleus='function _vyos_current() { \
     branch=$(jq -r -M .vyos_branch data/defaults.json)
