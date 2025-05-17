@@ -38,7 +38,6 @@ alias func_vybld='function _func_vyos_build() { \
     }; _func_vyos_build'
 alias vybld='func_vybld current'
 alias vybld_sagitta='func_vybld sagitta'
-alias vybld_equuleus='func_vybld equuleus'
 alias vybld_circinus='func_vybld circinus'
 alias isobuild='function _vyos_current() { \
     branch=$(tomlq -r -M .vyos_branch data/defaults.toml)
