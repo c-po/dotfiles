@@ -11,12 +11,11 @@ alias v2x='scp_vyos-1x LR2.wue3.mybll.net'
 alias v3x='scp_vyos-1x LR3.wue3.mybll.net'
 alias v4x='scp_vyos-1x LR4.wue3.mybll.net'
 alias scp_vyos-1x='function _vyos_v1x() { \
-    PATTERN_BASE="vyos-1x"
-    files=$(ls -1t ~/${PATTERN_BASE}*.deb | head -n 4)
+    files=$(ls -t ~/vyos-1x_*.deb ~/vyos-1x-smoketest_*.deb | head -n 2)
     scp -r $files $1:/tmp
     if [ "$?" == "0" ]; then
-        ssh $1 sudo dpkg --install --force-all /tmp/${PATTERN_BASE}*.deb
-        ssh $1 sudo rm -f /tmp/${PATTERN_BASE}*.deb
+        ssh $1 sudo dpkg --install --force-all /tmp/*.deb
+        ssh $1 sudo rm -f /tmp/*.deb
     fi
     }; _vyos_v1x'
 alias func_vybld='function _func_vyos_build() { \
