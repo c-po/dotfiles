@@ -43,10 +43,17 @@ alias vybld_circinus='func_vybld circinus'
 alias isobuild='function _vyos_current() { \
     branch=$(tomlq -r -M .vyos_branch data/defaults.toml)
     major="1.5"
-    flavor="generic"
     build_type="development"
+    version_extra=""
+    if [ ! -z "$1" ]; then
+        version_extra=$1
+    fi
+    flavor="generic"
+    if [ ! -z "$2" ]; then
+        flavor=$2
+    fi
     if [ ${branch} == "sagitta" ]; then
-        version="1.4$1-$(date +%Y%m%d%H%M)"
+        version="1.4$-$(date +%Y%m%d%H%M)"
         build_type="release"
     elif [ ${branch} == "circinus" ]; then
         version="1.5$1-$(date +%Y%m%d%H%M)"
@@ -61,19 +68,6 @@ alias isobuild='function _vyos_current() { \
         --architecture amd64 \
         --build-type $build_type \
         --custom-package "$custom_packages" $flavor; }; _vyos_current'
-alias isobuild_equuleus='function _vyos_current() { \
-    branch=$(jq -r -M .vyos_branch data/defaults.json)
-    major="1.3"
-    custom_packages="mc vim git tmux vyos-1x-smoketest"
-    if [ $branch == "crux" ]; then
-        major="1.2"
-        custom_packages="mc vim git tmux"
-    fi
-    version="${major}$1-$(date +%Y%m%d%H%M)"
-    echo "Building custom VyOS version: $version"
-    ./configure --build-by christian@breunig.cc \
-        --version $version --build-type release --custom-package "$custom_packages"
-    sudo make iso; }; _vyos_current'
 alias vydoc='docker pull vyos/vyos-documentation && docker run --rm -it \
     -v "$(pwd)":/vyos \
     -w /vyos/docs \
@@ -100,3 +94,9 @@ alias kali='docker run --rm -it \
     -v "$(pwd)":/kali \
     -w /kali \
     kalilinux/kali-rolling'
+alias shimbld='docker run --rm -it \
+        -v "$(pwd)":/vyos \
+        -v /etc/timezone:/etc/timezone:ro \
+        -v /etc/localtime:/etc/localtime:ro \
+        -w /vyos --privileged --sysctl net.ipv6.conf.lo.disable_ipv6=0 \
+        debian:trixie-20250630 bash'
