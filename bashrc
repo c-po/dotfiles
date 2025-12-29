@@ -45,23 +45,40 @@ esac
 # should be on the output of commands, not on the prompt
 #force_color_prompt=yes
 
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
-fi
+# helper to check if running inside a container
+is_container() {
+  # 1. Check for the 'container=podman' environment variable (most reliable for Podman)
+  if [ -n "$container" ] && [ "$container" == "podman" ]; then
+    return 0
+  fi
 
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
+  # 2. Check for the /.dockerenv file (Docker)
+  if [ -f /.dockerenv ]; then
+    return 0
+  fi
+
+  # 3. Check for Kubernetes/containerd indicator
+  if [ -f /run/containerd/io.containerd.runtime.v2.linux/k8s.io/containerd-shim ]; then
+    return 0
+  fi
+
+  # 4. Check /proc/self/cgroup for Podman, LXC, systemd-nspawn (more general)
+  if [ -f /proc/self/cgroup ]; then
+    if grep -q -E 'podman|lxc|systemd-nspawn' /proc/self/cgroup; then
+      return 0
+    fi
+  fi
+
+  # 5. Check for common cgroup controllers (last resort - less specific)
+  if [ -f /proc/1/cgroup ]; then
+    if grep -q -E 'cpu|memory|blkio|pids' /proc/1/cgroup; then
+      return 0
+    fi
+  fi
+
+  # If none of the checks pass
+  return 1
+}
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -121,7 +138,11 @@ function git-branch-prompt {
   local branch=`git-branch-name`
   if [ $branch ]; then printf " [%s]" $branch; fi
 }
-PS1="(\A) \[\033[01;37m\]\u\[\033[01;31m\] \h\[\033[00m\]:\w\$(git-branch-prompt) # "
+if is_container; then
+    PS1="(\A) \[\033[01;32m\]\h\[\033[00m\]:\w\$(git-branch-prompt) # "
+else
+    PS1="(\A) \[\033[01;37m\]\u\[\033[01;31m\] \h\[\033[00m\]:\w\$(git-branch-prompt) # "
+fi
 
 export EMAIL="christian@breunig.cc"
 export NAME="Christian Breunig"
@@ -130,19 +151,21 @@ if [ -f ~/.pythonrc ]; then
     export PYTHONSTARTUP=~/.pythonrc
 fi
 
-if [ -f ~/.ssh/id_rsa ] || [ -f ~/.ssh/id_ed25519 ] || [ -f ~/.ssh/id_ecdsa ]; then
-    if [ -x "$(command -v keychain)" ]; then
-        for key in $(find $HOME/.ssh -type f ! -name "*.*" -name "id_*"); do
-            keychain --nogui $key
-        done
-        source $HOME/.keychain/$HOSTNAME-sh
-    else
-        if [ ! -S ~/.ssh/ssh_auth_sock ]; then
-            eval `ssh-agent`
-            ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+if ! is_container; then
+    if [ -f ~/.ssh/id_rsa ] || [ -f ~/.ssh/id_ed25519 ] || [ -f ~/.ssh/id_ecdsa ]; then
+        if [ -x "$(command -v keychain)" ]; then
+            for key in $(find $HOME/.ssh -type f ! -name "*.*" -name "id_*"); do
+                keychain --nogui $key
+            done
+            source $HOME/.keychain/$HOSTNAME-sh
+        else
+            if [ ! -S ~/.ssh/ssh_auth_sock ]; then
+                eval `ssh-agent`
+                ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
+            fi
+            export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+            ssh-add -l > /dev/null || ssh-add
         fi
-        export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
-        ssh-add -l > /dev/null || ssh-add
     fi
 fi
 
