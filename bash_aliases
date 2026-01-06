@@ -20,11 +20,13 @@ alias scp_vyos-1x='function _vyos_v1x() { \
     fi
     }; _vyos_v1x'
 alias func_vybld='function _func_vyos_build() { \
+    CONTAINER=docker
+    if test -x /usr/bin/podman; then
+        CONTAINER=/usr/bin/podman
+    fi
 #   docker pull vyos/vyos-build:$1
-    docker run --rm -it \
+    $CONTAINER run --rm -it \
         -v "$(pwd)":/vyos \
-        -v /etc/timezone:/etc/timezone:ro \
-        -v /etc/localtime:/etc/localtime:ro \
         -v "$HOME/.vimrc":/home/vyos_bld/.vimrc \
         -v "$HOME/.vim":/home/vyos_bld/.vim \
         -v "$HOME/.gitconfig":/home/vyos_bld/.gitconfig \
