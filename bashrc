@@ -112,7 +112,7 @@ function git-branch-prompt {
   if [ $branch ]; then printf " [%s]" $branch; fi
 }
 if is_container; then
-    PS1="(\A) \[\033[01;32m\]\h\[\033[00m\]:\w\$(git-branch-prompt) # "
+    PS1="(\A) \[\033[01;37m\]\u\[\033[01;31m\] \[\033[01;32m\]\h\[\033[00m\]:\w\$(git-branch-prompt) # "
 else
     PS1="(\A) \[\033[01;37m\]\u\[\033[01;31m\] \h\[\033[00m\]:\w\$(git-branch-prompt) # "
 fi
