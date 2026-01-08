@@ -77,20 +77,11 @@ alias vydoc='docker pull vyos/vyos-documentation && docker run --rm -it \
     vyos/vyos-documentation make html'
 alias youtube='./yt-dlp_linux -f bestvideo*+bestaudio/best'
 alias youtube_audio='~/yt-dlp_linux -f "bestaudio[ext=m4a]/bestaudio"'
-alias anscvp='docker run --rm -it \
-    -v "$(pwd)":/arista \
-    -v /etc/timezone:/etc/timezone:ro \
-    -v /etc/localtime:/etc/localtime:ro \
-    -v "$HOME/.vimrc":/home/ans_cvp/.vimrc \
-    -v "$HOME/.vim":/home/ans_cvp/.vim \
-    -v "$HOME/.gitconfig":/etc/gitconfig \
-    -v "$HOME/local.gitconfig":/etc/local.gitconfig \
-    -v "$HOME/local.bash_aliases":/home/ans_cvp/local.bash_aliases \
-    -v "$HOME/.bash_aliases":/home/ans_cvp/.bash_aliases \
-    -v "$HOME/.bash_history":/home/ans_cvp/.bash_history \
-    -v "$HOME/.bashrc":/home/ans_cvp/.bashrc \
-    -w /arista \
-    -e GOSU_UID=$(id -u) -e GOSU_GID=$(id -g) \
+alias anscvp='podman run --rm --interactive --tty \
+    --security-opt label=disable \
+    --volume "$HOME:$HOME" \
+    --userns=keep-id \
+    --workdir $HOME \
     ansible-arista:latest bash'
 alias kali='docker run --rm -it \
     -v "$(pwd)":/kali \
