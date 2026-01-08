@@ -47,37 +47,19 @@ esac
 
 # helper to check if running inside a container
 is_container() {
-  # 1. Check for the 'container=podman' environment variable (most reliable for Podman)
-  if [ -n "$container" ] && [ "$container" == "podman" ]; then
-    return 0
-  fi
-
-  # 2. Check for the /.dockerenv file (Docker)
-  if [ -f /.dockerenv ]; then
-    return 0
-  fi
-
-  # 3. Check for Kubernetes/containerd indicator
-  if [ -f /run/containerd/io.containerd.runtime.v2.linux/k8s.io/containerd-shim ]; then
-    return 0
-  fi
-
-  # 4. Check /proc/self/cgroup for Podman, LXC, systemd-nspawn (more general)
-  if [ -f /proc/self/cgroup ]; then
-    if grep -q -E 'podman|lxc|systemd-nspawn' /proc/self/cgroup; then
-      return 0
+    # Check 'container=podman' environment variable (most reliable for Podman)
+    if [ -n "$container" ] && [ "$container" == "podman" ]; then
+        return 0
     fi
-  fi
-
-  # 5. Check for common cgroup controllers (last resort - less specific)
-  if [ -f /proc/1/cgroup ]; then
-    if grep -q -E 'cpu|memory|blkio|pids' /proc/1/cgroup; then
-      return 0
+    # Check for /.dockerenv file (Docker)
+    if [ -f /.dockerenv ]; then
+        return 0
     fi
-  fi
-
-  # If none of the checks pass
-  return 1
+    # Check Kubernetes/containerd indicator
+    if [ -f /run/containerd/io.containerd.runtime.v2.linux/k8s.io/containerd-shim ]; then
+        return 0
+    fi
+    return 1
 }
 
 # enable color support of ls and also add handy aliases
