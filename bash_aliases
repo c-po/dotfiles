@@ -27,14 +27,13 @@ alias func_vybld='function _func_vyos_build() { \
 #   docker pull vyos/vyos-build:$1
     $CONTAINER run --rm -it \
         -v "$(pwd)":/vyos \
-        -v "$HOME/.vimrc":/home/vyos_bld/.vimrc \
-        -v "$HOME/.vim":/home/vyos_bld/.vim \
-        -v "$HOME/.gitconfig":/home/vyos_bld/.gitconfig \
-        -v "$HOME/local.gitconfig":/home/vyos_bld/local.gitconfig \
-        -v "$HOME/.bash_aliases":/home/vyos_bld/.bash_aliases \
-        -v "$HOME/local.bash_aliases":/home/vyos_bld/local.bash_aliases \
-        -v "$HOME/.bashrc":/home/vyos_bld/.bashrc \
-        -v "$HOME/.bash_history":/home/vyos_bld/.bash_history \
+        -v $HOME/.cache:/home/vyos_bld/.cache \
+        -v $HOME/.gitconfig:/home/vyos_bld/.gitconfig \
+        -v $HOME/local.gitconfig:/home/vyos_bld/local.gitconfig \
+        -v $HOME/.bash_aliases:/home/vyos_bld/.bash_aliases \
+        -v $HOME/local.bash_aliases:/home/vyos_bld/local.bash_aliases \
+        -v $HOME/.bashrc:/home/vyos_bld/.bashrc \
+        -v $HOME/.bash_history:/home/vyos_bld/.bash_history \
         -w /vyos --privileged --sysctl net.ipv6.conf.lo.disable_ipv6=0 \
         -e GOSU_UID=$(id -u) -e GOSU_GID=$(id -g) \
         vyos/vyos-build:$1 bash
