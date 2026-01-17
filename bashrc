@@ -143,7 +143,7 @@ if ! is_container; then
 fi
 
 # CDir on WSL hosts to real home instead of /mnt/c/Users/<username> Windows home
-if [[ ! -f /.dockerenv ]] && [[ "$(< /proc/sys/kernel/osrelease)" == *[Mm]icrosoft* ]]; then
+if [[ ! -f /.dockerenv ]] && [[ -f /proc/sys/kernel/osrelease ]] && [[ "$(< /proc/sys/kernel/osrelease)" == *[Mm]icrosoft* ]]; then
     cd
     RUNNING=`ps aux | grep dockerd | grep -v grep`
     if [ -x /usr/bin/dockerd ] && [ -z "$RUNNING" ]; then
