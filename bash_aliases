@@ -12,7 +12,7 @@ alias v3x='scp_vyos-1x LR3.wue3.mybll.net'
 alias v4x='scp_vyos-1x LR4.wue3.mybll.net'
 alias ssh-weak="ssh -o KexAlgorithms=+diffie-hellman-group14-sha1 -oHostKeyAlgorithms=+ssh-rsa"
 alias scp_vyos-1x='function _vyos_v1x() { \
-    files=$(ls -t ~/vyos-1x_*.deb ~/vyos-1x-smoketest_*.deb | head -n 2)
+    files=$(ls -t ~/libvyosconfig0_*.deb ~/vyos-1x_*.deb ~/vyos-1x-smoketest_*.deb | head -n 2)
     scp -r $files $1:/tmp
     if [ "$?" == "0" ]; then
         ssh $1 sudo dpkg --install --force-all /tmp/*.deb
