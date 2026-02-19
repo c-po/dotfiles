@@ -1,3 +1,27 @@
+function _vyos_build_container() {
+    CONTAINER=docker
+    if test -x /usr/bin/podman; then
+        CONTAINER=/usr/bin/podman
+    fi
+#   docker pull vyos/vyos-build:$1
+    ARCH=""
+    if test -x /usr/bin/arch && [ "$(/usr/bin/arch)" == "arm64" ]; then
+        ARCH="-arm64"
+    fi
+    $CONTAINER run --rm -it \
+        -v "$(pwd)":/vyos \
+        -v $HOME/.cache:/home/vyos_bld/.cache \
+        -v $HOME/.gitconfig:/home/vyos_bld/.gitconfig \
+        -v $HOME/local.gitconfig:/home/vyos_bld/local.gitconfig \
+        -v $HOME/.bash_aliases:/home/vyos_bld/.bash_aliases \
+        -v $HOME/local.bash_aliases:/home/vyos_bld/local.bash_aliases \
+        -v $HOME/.bashrc:/home/vyos_bld/.bashrc \
+        -v $HOME/.bash_history:/home/vyos_bld/.bash_history \
+        -w /vyos --privileged --sysctl net.ipv6.conf.lo.disable_ipv6=0 \
+        -e GOSU_UID=$(id -u) -e GOSU_GID=$(id -g) \
+        vyos/vyos-build:$1$ARCH bash
+}
+
 alias dbld='dpkg-buildpackage -uc -us -tc -b'
 alias dir='ls --color=auto --format=vertical'
 alias grep='grep --color=auto --exclude=*.pyc --exclude-dir=\.git --exclude-dir=\.svn'
@@ -19,28 +43,9 @@ alias scp_vyos-1x='function _vyos_v1x() { \
         ssh $1 sudo rm -f /tmp/*.deb
     fi
     }; _vyos_v1x'
-alias func_vybld='function _func_vyos_build() { \
-    CONTAINER=docker
-    if test -x /usr/bin/podman; then
-        CONTAINER=/usr/bin/podman
-    fi
-#   docker pull vyos/vyos-build:$1
-    $CONTAINER run --rm -it \
-        -v "$(pwd)":/vyos \
-        -v $HOME/.cache:/home/vyos_bld/.cache \
-        -v $HOME/.gitconfig:/home/vyos_bld/.gitconfig \
-        -v $HOME/local.gitconfig:/home/vyos_bld/local.gitconfig \
-        -v $HOME/.bash_aliases:/home/vyos_bld/.bash_aliases \
-        -v $HOME/local.bash_aliases:/home/vyos_bld/local.bash_aliases \
-        -v $HOME/.bashrc:/home/vyos_bld/.bashrc \
-        -v $HOME/.bash_history:/home/vyos_bld/.bash_history \
-        -w /vyos --privileged --sysctl net.ipv6.conf.lo.disable_ipv6=0 \
-        -e GOSU_UID=$(id -u) -e GOSU_GID=$(id -g) \
-        vyos/vyos-build:$1 bash
-    }; _func_vyos_build'
-alias vybld='func_vybld current'
-alias vybld_sagitta='func_vybld sagitta'
-alias vybld_circinus='func_vybld circinus'
+alias vybld='_vyos_build_container current'
+alias vybld_sagitta='_vyos_build_container sagitta'
+alias vybld_circinus='_vyos_build_container circinus'
 alias isobuild='function _vyos_current() { \
     branch=$(tomlq -r -M .vyos_branch data/defaults.toml)
     major="1.5"
