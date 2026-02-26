@@ -66,7 +66,7 @@ alias isobuild='function _vyos_current() { \
     else
         version="$(date -u +%Y.%m.%d-%H%M)$1"
     fi
-    custom_packages="strace vim tmux git mc vyos-1x-smoketest"
+    custom_packages="tmux"
     echo "Building custom VyOS version: $version"
     sudo ./build-vyos-image \
         --build-by christian@breunig.cc \
