@@ -71,7 +71,7 @@ alias isobuild='function _vyos_current() { \
     sudo ./build-vyos-image \
         --build-by christian@breunig.cc \
         --version $version \
-        --architecture amd64 \
+        --architecture $(dpkg-architecture -q DEB_HOST_ARCH) \
         --build-type $build_type \
         --custom-package "$custom_packages" $flavor; }; _vyos_current'
 alias vydoc='docker pull vyos/vyos-documentation && docker run --rm -it \
