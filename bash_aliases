@@ -28,6 +28,7 @@ alias grep='grep --color=auto --exclude=*.pyc --exclude-dir=\.git --exclude-dir=
 alias irssi='TERM=screen-256color irssi'
 alias l='ls -al --color=always'
 alias ll='ls -l'
+alias ..='cd ..'
 alias lsports='sudo netstat -tulnp'
 alias v1x='scp_vyos-1x LR1.wue3.mybll.net'
 alias v2x='scp_vyos-1x LR2.wue3.mybll.net'
