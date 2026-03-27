@@ -25,6 +25,10 @@ create inputrc ../.inputrc
 create zshrc ../.zshrc
 create p10k.zsh ../.p10k.zsh
 
+if [ "$(uname -o)" == "Darwin" ]; then
+  create Brewfile ../Brewfile
+fi
+
 if [ ! -f ~/local.bash_aliases ]; then
     touch ~/local.bash_aliases
 fi
