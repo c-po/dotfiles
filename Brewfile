@@ -39,7 +39,7 @@ cask "font-hack-nerd-font"
 
 # DevOps
 brew 'ansible'            # Automation
-brew 'docker'             # Containers
+cask 'docker-desktop'     # Containers
 
 # Network and Security Testing
 brew 'bettercap'          # Network, scanning and monitoring
@@ -59,7 +59,12 @@ cask 'spotify', args: { require_sha: false } # Propietary music streaming
 cask 'vlc'                # Media player
 
 # Personal Applications
-cask 'enpass'             # Password Manager
+mas 'enpass', id: 732710998
+mas 'slack', id: 803453959
+cask 'nextcloud'
+mas 'Menu Bar Controller für Sonos', id: 6749351423
+mas 'Amphetamine', id: 937984704
 
 # Browsers
 cask 'firefox'
+cask 'google-chrome', args: { require_sha: false }
