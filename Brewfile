@@ -4,7 +4,8 @@
 # Options
 cask_args appdir: '/Applications', require_sha: true
 
-tap "lance0/tap"
+tap 'lance0/tap'
+tap 'dail8859/notepadnext'
 
 ##################################
 # Command Line                   #
@@ -40,11 +41,13 @@ cask "font-hack-nerd-font"
 # DevOps
 brew 'ansible'            # Automation
 cask 'docker-desktop'     # Containers
+cask 'dail8859/notepadnext/notepadnext' # Notepad++ replacement
 
 # Network and Security Testing
 brew 'bettercap'          # Network, scanning and monitoring
 brew 'nmap'               # Port scanning
 brew 'mtr'                # Better traceroute tool
+brew 'lance0/tap/ttl'     # Better mtr
 brew 'wget'
 brew 'curl'
 
