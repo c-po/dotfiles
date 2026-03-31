@@ -3,10 +3,18 @@ function _vyos_build_container() {
     if test -x /usr/bin/podman; then
         CONTAINER=/usr/bin/podman
     fi
-#   docker pull vyos/vyos-build:$1
     ARCH=""
     if test -x /usr/bin/arch && [ "$(/usr/bin/arch)" == "arm64" ]; then
         ARCH="-arm64"
+    fi
+    VOLUME_NAME="vyos-build"
+    VOLUME_MOUNT=""
+    if docker volume inspect $VOLUME_NAME >/dev/null 2>&1; then
+	# Docker on macOS does not support building on a bind-mounted folder
+	# We need a native docker volume
+	if [ -d $(pwd)/vyos-build ]; then
+            VOLUME_MOUNT="-v $VOLUME_NAME:/vyos/vyos-build/build"
+	fi
     fi
     $CONTAINER run --rm -it \
         -v "$(pwd)":/vyos \
@@ -17,6 +25,7 @@ function _vyos_build_container() {
         -v $HOME/local.bash_aliases:/home/vyos_bld/local.bash_aliases \
         -v $HOME/.bashrc:/home/vyos_bld/.bashrc \
         -v $HOME/.bash_history:/home/vyos_bld/.bash_history \
+        $VOLUME_MOUNT \
         -w /vyos --privileged --sysctl net.ipv6.conf.lo.disable_ipv6=0 \
         -e GOSU_UID=$(id -u) -e GOSU_GID=$(id -g) \
         vyos/vyos-build:$1$ARCH bash
