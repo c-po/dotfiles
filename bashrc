@@ -155,6 +155,10 @@ if [ -f /etc/ssl/certs/ca-certificates.crt ]; then
     export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 fi
 
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+fi
+
 if [ -f ~/local.bash_aliases ]; then
     . ~/local.bash_aliases
 fi
