@@ -67,6 +67,7 @@ mas 'slack', id: 803453959
 cask 'nextcloud'
 mas 'Menu Bar Controller für Sonos', id: 6749351423
 mas 'Amphetamine', id: 937984704
+cask 'wireshark-app'
 
 # Browsers
 cask 'firefox'
