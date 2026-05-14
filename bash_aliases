@@ -68,7 +68,7 @@ alias isobuild='function _vyos_current() { \
         flavor=$2
     fi
     if [ ${branch} == "sagitta" ]; then
-        version="1.4$-$(date +%Y%m%d%H%M)"
+        version="1.4$1-$(date +%Y%m%d%H%M)"
         build_type="release"
     elif [ ${branch} == "circinus" ]; then
         version="1.5$1-$(date +%Y%m%d%H%M)"
