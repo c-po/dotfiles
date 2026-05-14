@@ -49,6 +49,9 @@ brew 'mtr'                # Better traceroute tool
 brew 'lance0/tap/ttl'     # Better mtr
 brew 'wget'
 brew 'curl'
+brew 'bgpq3'
+brew 'ncftp'
+brew 'watch'
 
 ##################################
 # Desktop Applications           #
