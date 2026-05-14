@@ -72,6 +72,7 @@ alias isobuild='function _vyos_current() { \
         build_type="release"
     elif [ ${branch} == "circinus" ]; then
         version="1.5$1-$(date +%Y%m%d%H%M)"
+        build_type="release"
     else
         version="$(date -u +%Y.%m.%d-%H%M)$1"
     fi
