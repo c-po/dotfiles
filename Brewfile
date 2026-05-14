@@ -36,6 +36,7 @@ brew 'dos2unix'           # Change line endings
 cask 'iterm2'             # Better terminal emulator
 cask 'visual-studio-code' # Code editor - IDE
 cask 'font-hack-nerd-font'
+cask 'zed'                # Multiplayer code editor
 
 # DevOps
 brew 'ansible'            # Automation
