@@ -5,7 +5,6 @@
 cask_args appdir: '/Applications', require_sha: true
 
 tap 'lance0/tap'
-tap 'dail8859/notepadnext'
 
 ##################################
 # Command Line                   #
@@ -36,12 +35,11 @@ brew 'dos2unix'           # Change line endings
 # Development Apps
 cask 'iterm2'             # Better terminal emulator
 cask 'visual-studio-code' # Code editor - IDE
-cask "font-hack-nerd-font"
+cask 'font-hack-nerd-font'
 
 # DevOps
 brew 'ansible'            # Automation
 cask 'docker-desktop'     # Containers
-cask 'dail8859/notepadnext/notepadnext' # Notepad++ replacement
 
 # Network and Security Testing
 brew 'bettercap'          # Network, scanning and monitoring
